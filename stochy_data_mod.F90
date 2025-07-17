@@ -710,13 +710,13 @@ module stochy_data_mod
          if (stochini) then
             ierr=NF90_INQ_VARID(stochlun,"ocnskeb_seed", varid1)
             if (ierr .NE. 0) then
-               write(0,*) 'error inquring OCNSPPT seed'
+               write(0,*) 'error inquring OCNSKEB seed'
                iret = ierr
                return
             end if
             ierr=NF90_INQ_VARID(stochlun,"ocnskeb_spec", varid2)
             if (ierr .NE. 0) then
-               write(0,*) 'error inquring OCNSPPT spec'
+               write(0,*) 'error inquring OCNSKEB spec'
                iret = ierr
                return
             end if
@@ -753,7 +753,7 @@ module stochy_data_mod
                rpattern_ocnskeb(n)%spec_o(nn,1,1) = rpattern_ocnskeb(n)%stdev*rpattern_ocnskeb(n)%spec_o(nn,1,1)*rpattern_ocnskeb(n)%varspectrum(nm)
                rpattern_ocnskeb(n)%spec_o(nn,2,1) = rpattern_ocnskeb(n)%stdev*rpattern_ocnskeb(n)%spec_o(nn,2,1)*rpattern_ocnskeb(n)%varspectrum(nm)
             enddo
-            print*,'calling patterngenerator_advance norm init'
+            if (is_rootpe()) print*,'calling patterngenerator_advance norm init'
             call patterngenerator_advance_jb(rpattern_ocnskeb(n))
             !call patterngenerator_advance(rpattern_ocnskeb(n))
 !             if (is_rootpe()) then

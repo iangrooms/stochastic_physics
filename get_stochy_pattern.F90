@@ -561,7 +561,9 @@ subroutine write_stoch_restart_ocn(sfile)
     integer :: ncid,varid1a,varid1b,varid2a,varid2b,varid3a,varid3b,varid4a,varid4b
     integer :: seed_dim_id,spec_dim_id,np_dim_id
     include 'netcdf.inc'
-    print*,'in write restart',do_ocnsppt,pert_epbl,do_ocnskeb
+    if (is_rootpe()) then
+        print*,'in write restart',do_ocnsppt,pert_epbl,do_ocnskeb
+    end if
     if ( ( .NOT. do_ocnsppt) .AND. (.NOT. pert_epbl) .AND. ( .NOT. do_ocnskeb) ) return
     stochlun=99
     if (is_rootpe()) then
@@ -592,9 +594,9 @@ subroutine write_stoch_restart_ocn(sfile)
        endif
        if (do_ocnskeb) then
           ierr=NF90_DEF_VAR(ncid,"ocnskeb_seed",NF90_DOUBLE,(/seed_dim_id, np_dim_id/), varid4a)
-          ierr=NF90_PUT_ATT(ncid,varid4a,"long_name","random number seed for SPPT")
+          ierr=NF90_PUT_ATT(ncid,varid4a,"long_name","random number seed for SKEB")
           ierr=NF90_DEF_VAR(ncid,"ocnskeb_spec",NF90_DOUBLE,(/spec_dim_id, np_dim_id/), varid4b)
-          ierr=NF90_PUT_ATT(ncid,varid4b,"long_name","spectral cofficients SPPT")
+          ierr=NF90_PUT_ATT(ncid,varid4b,"long_name","spectral cofficients SKEB")
        endif
        ierr=NF90_ENDDEF(ncid)
        if (ierr .NE. 0) then
