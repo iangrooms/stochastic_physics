@@ -13,6 +13,7 @@ General options
    "LON_S", "Optional, number of longitude points for the gaussian grid (recommend 2xLAT_S, default is for model to determine gaussian grid"
    "FHSTOCH", "Optional, forecast hour to write out random pattern in order to restart the pattern for a different forecast (used in DA), file is stoch_out.F<HHH>"
    "STOCHINI", "Optional, set to true if wanting to read in a previous random pattern (input file needs to be named stoch_ini)."
+   "STOCH_RESTFILE", "Optional, can be used to specify a non-default location for the ocean stochastic restart file."
 
 SPPT options 
 """"""""""""
