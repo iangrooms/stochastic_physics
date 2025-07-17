@@ -544,7 +544,7 @@ module stochy_data_mod
    if (is_rootpe()) then
       if (stochini) then
          print*,'opening stoch_ini'
-         ierr=nf90_open('INPUT/ocn_stoch.res.nc',nf90_nowrite,ncid=stochlun)
+         ierr=nf90_open(TRIM(stoch_restfile),nf90_nowrite,ncid=stochlun)
          if (ierr .NE. 0) then
             write(0,*) 'error opening stoch_ini'
             iret = ierr

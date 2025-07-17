@@ -53,4 +53,6 @@
       character(len=10), dimension(max_n_var_spp)         ::  spp_var_list
       real(kind=kind_dbl_prec), dimension(max_n_var_spp) ::  spp_prt_list
 
+      character(len=128) :: stoch_restfile = './INPUT/ocn_stoch.res.nc'
+
       end module stochy_namelist_def

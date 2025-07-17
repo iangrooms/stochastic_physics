@@ -63,7 +63,7 @@ module compns_stochy_mod
       shum_sigefold,spptint,shumint,skebint,skeb_npass,use_zmtnblck,new_lscale,     &
       epbl,epbl_lscale,epbl_tau,iseed_epbl,                                         &
       ocnsppt,ocnsppt_lscale,ocnsppt_tau,iseed_ocnsppt,pbl_taper,                   &  
-      ocnskeb,ocnskeb_lscale,ocnskeb_tau,iseed_ocnskeb
+      ocnskeb,ocnskeb_lscale,ocnskeb_tau,iseed_ocnskeb,stoch_restfile
 
       namelist /nam_sfcperts/lndp_type,lndp_model_type, lndp_var_list, lndp_prt_list, & 
                             iseed_lndp,lndpint,lndp_tau,lndp_lscale 
@@ -474,7 +474,7 @@ module compns_stochy_mod
       shum_sigefold,spptint,shumint,skebint,skeb_npass,use_zmtnblck,new_lscale,     &
       epbl,epbl_lscale,epbl_tau,iseed_epbl,                                         &
       ocnsppt,ocnsppt_lscale,ocnsppt_tau,iseed_ocnsppt,pbl_taper,                   &
-      ocnskeb,ocnskeb_lscale,ocnskeb_tau,iseed_ocnskeb
+      ocnskeb,ocnskeb_lscale,ocnskeb_tau,iseed_ocnskeb,stoch_restfile
 
       namelist /nam_sfcperts/lndp_type,lndp_model_type,lndp_var_list, lndp_prt_list, iseed_lndp, & 
       lndp_tau,lndp_lscale 
