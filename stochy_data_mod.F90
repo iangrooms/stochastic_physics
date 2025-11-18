@@ -44,7 +44,7 @@ module stochy_data_mod
  real(kind=kind_phys),public, allocatable :: skebu_save(:,:,:),skebv_save(:,:,:)
  integer,public :: INTTYP
  type(stochy_internal_state),public :: gis_stochy,gis_stochy_ocn,gis_stochy_ocn_skeb
- character(len=128) :: stoch_restfile = './INPUT/ocn_stoch.res.nc'
+ character(len=2048) :: stoch_restfile = './INPUT/ocn_stoch.res.nc' ! same length as restartfiles in mom_cap.F90
 
  contains
 !>@brief The subroutine 'init_stochdata' determins which stochastic physics
@@ -547,7 +547,7 @@ module stochy_data_mod
          print*,'opening stoch_ini'
          ierr=nf90_open(TRIM(stoch_restfile),nf90_nowrite,ncid=stochlun)
          if (ierr .NE. 0) then
-            write(0,*) 'error opening stoch_ini'
+            write(0,*) 'error opening stoch_ini file:', trim(stoch_restfile)
             iret = ierr
             return
          end if
