@@ -1,6 +1,6 @@
 !>@brief The module 'stochy_patterngenerator_mod' contains the derived type random_pattern
 !! which controls the characteristics of the random pattern
-!! This is a modified version of the original one stochy_patterngenerator.F90, where the 
+!! This is a modified version of the original one stochy_patterngenerator.F90, where the
 !! the random patterns are not properly normalized
 module stochy_patterngenerator_mod
 
@@ -74,11 +74,11 @@ module stochy_patterngenerator_mod
    if (present(bn)) bn_local=bn
    if (is_rootpe()) then
       if (present(bn)) then
-           print*,'Berner norm=',bn
+         print*,'Berner norm=',bn
       else
-           print*,'old norm'
+         print*,'old norm'
       endif
-   endif
+   end if
    nlons = nlon
    nlats = nlat
    ntrunc = jcap
@@ -207,7 +207,7 @@ module stochy_patterngenerator_mod
    enddo
  end subroutine patterngenerator_destroy
 
-!>@brief The subroutine 'computevarspec' compute the globally integrated 
+!>@brief The subroutine 'computevarspec' compute the globally integrated
 !! variance from complex spectral coefficients
 !>@details this is necessary to ensure the proper global variance
  subroutine computevarspec(rpattern,dataspec,var)
@@ -227,7 +227,7 @@ module stochy_patterngenerator_mod
     enddo
  end subroutine computevarspec
 
-!>@brief The subroutine 'computevarspec_r' compute the globally integrated 
+!>@brief The subroutine 'computevarspec_r' compute the globally integrated
 !! variance from real spectral coefficients
 !>@details this is necessary to ensure the proper global variance
  subroutine computevarspec_r(rpattern,dataspec,var)
@@ -396,7 +396,7 @@ module stochy_patterngenerator_mod
   type(random_pattern), intent(inout) :: rpattern
   integer, intent(in) :: varspect_opt
   logical, intent(in) :: new_lscale
-  logical, intent(in) :: berner_normalize 
+  logical, intent(in) :: berner_normalize
   integer :: n, nm
   complex(kind_dbl_prec) noise(ndimspec)
   real(kind_dbl_prec) var,b_jb,rerth,inv_rerth_sq,pi,gamma_sum,deltaE
@@ -423,7 +423,7 @@ module stochy_patterngenerator_mod
         do n=0,ntrunc
            rpattern%varspectrum1d(n) = exp(-rpattern%lengthscale**2*(float(n)*(float(n)+1.))/(4.*rerth**2))
         enddo
-        print*,'Finished'
+        if (is_rootpe()) print*,'Finished'
      endif
   else if (varspect_opt == 1) then ! power law
      ! rpattern%lengthscale is interpreted as a power, not a length.
@@ -454,7 +454,7 @@ module stochy_patterngenerator_mod
      call computevarspec(rpattern,noise,var)
      rpattern%varspectrum = rpattern%varspectrum/sqrt(var)
      rpattern%varspectrum1d = rpattern%varspectrum1d/var
-  
+
   else if (berner_normalize) then ! normalize by Berner et al. 2009
      do n=1,len_trie_ls
          nm = rpattern%idx_e(n)
